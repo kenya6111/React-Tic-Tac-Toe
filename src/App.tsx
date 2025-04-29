@@ -10,6 +10,7 @@ function App() {
   const onClickBlock = (index:number) => {
     const newArray = [...array]
     if(newArray[index]) return
+    if(isGameSet) return
     console.log(111)
     if (isPlayerX){
       newArray[index]="○"
