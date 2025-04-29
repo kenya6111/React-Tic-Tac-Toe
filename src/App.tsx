@@ -22,6 +22,11 @@ function App() {
   }
   return (
     <div className="App">
+        {isPlayerX ?(
+          <p>Next player: X</p>
+        ):(
+          <p>Next player: Y</p>
+        )}
       <div className="container">
         {array.map((arr,index)=>(
           <>
