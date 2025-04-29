@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { Block } from './components/Block';
 
 function App() {
+  const [isPlayerX , setIsPlayerX] = useState(true)
+  const [array , setArray] = useState(["","","","","","","","",""])
+  const onClickBlock = (index:number) => {
+    console.log(111)
+    const newArray = [...array]
+    if(newArray[index]) return
+    if (isPlayerX){
+      newArray[index]="○"
+    }else{
+      newArray[index]="×"
+    }
+    console.log(index)
+
+    setArray(newArray)
+    // playerフラグを反転
+    setIsPlayerX(!isPlayerX)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        {array.map((arr,index)=>(
+          <>
+          <Block  val={arr}  onClickBlock={onClickBlock} index={index}/>
+          </>
+        ))}
+      </div>
+
     </div>
   );
 }
