@@ -6,6 +6,8 @@ function App() {
   const [isPlayerX , setIsPlayerX] = useState(true)
   const [array , setArray] = useState(["","","","","","","","",""])
   const [isGameSet, setIsGameSet] = useState(false)
+  const [history,setHistory] = useState([Array(9).fill(null)])
+
   const onClickBlock = (index:number) => {
     const newArray = [...array]
     if(newArray[index]) return
@@ -21,8 +23,19 @@ function App() {
     setArray(newArray)
     // playerフラグを反転
     setIsPlayerX(!isPlayerX)
+
+    // 履歴記録
+    const newHistory = [...history]
+    newHistory.push(newArray)
+    setHistory(newHistory)
   }
 
+  const onClickHistory = (index:number) => {
+    console.log(index)
+    const targetHistory = history[index]
+    setArray(targetHistory)
+
+  }
   const checkWinner = ()=>{
     console.log(222)
     const arr1 = array[0] === array[1] ? (array[1] === array[2] ? (array[2] !== "" ? true : false) : false ) : false
@@ -55,6 +68,16 @@ function App() {
         {array.map((arr,index)=>(
           <>
           <Block  val={arr}  onClickBlock={onClickBlock} index={index}/>
+          </>
+        ))}
+      </div>
+
+      <div>
+        {history.map((his,index)=>(
+          <>
+            <div>
+              <button onClick={()=>onClickHistory(index)}>go to game #{index}</button>
+            </div>
           </>
         ))}
       </div>
