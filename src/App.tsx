@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react';
 import './App.css';
 import { Block } from './components/Block';
+import { HistoryButton } from './components/HistoryButton';
 
 function App() {
   const [isPlayerX , setIsPlayerX] = useState(true)
@@ -52,7 +53,7 @@ function App() {
     }
   }
 
-  useEffect(checkWinner, array)
+  useEffect(checkWinner, [array])
   return (
     <div className="App">
       {isGameSet ? (
@@ -67,7 +68,7 @@ function App() {
       <div className="container">
         {array.map((arr,index)=>(
           <>
-          <Block  val={arr}  onClickBlock={onClickBlock} index={index}/>
+            <Block  val={arr}  onClickBlock={onClickBlock} index={index}/>
           </>
         ))}
       </div>
@@ -75,9 +76,7 @@ function App() {
       <div>
         {history.map((his,index)=>(
           <>
-            <div>
-              <button onClick={()=>onClickHistory(index)}>go to game #{index}</button>
-            </div>
+            <HistoryButton onClickHistory={onClickHistory} index={index}/>
           </>
         ))}
       </div>
